@@ -31,6 +31,8 @@
 #import "SDKWrapper.h"
 #import "platform/ios/CCEAGLView-ios.h"
 #import "jsb_global.h"
+#include "cocos/scripting/js-bindings/jswrapper/SeApi.h"
+
 
 
 using namespace cocos2d;
@@ -55,7 +57,8 @@ Application* app = nullptr;
     app->setMultitouch(true);
     NSString * key = [launchOptions objectForKey:@"xxtea_key"];
     jsb_set_xxtea_key([key UTF8String]);
-	
+    //run the cocos2d-x game scene
+    app->start();
     // Use RootViewController to manage CCEAGLView
     _viewController = [[RootViewController alloc]init];
 #ifdef NSFoundationVersionNumber_iOS_7_0
@@ -81,8 +84,6 @@ Application* app = nullptr;
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     
-    //run the cocos2d-x game scene
-    app->start();
     
     return YES;
 }
@@ -138,12 +139,16 @@ Application* app = nullptr;
      */
 }
 
-- (BOOL)callNativeWithReturnBool:(NSString *) title andContent:(NSString *)content{
+-(BOOL)callNativeWithReturnBool:(NSString *) title andContent:(NSString *)content{
     return true;
 }
 
-- (NSString *)callNativeWithReturnString:(NSString *) title andContent:(NSString *)content{
+-(NSString *)callNativeWithReturnString:(NSString *) title andContent:(NSString *)content{
     return @"callNativeWithReturnString";
+}
+
++(BOOL)evalScript:(NSString *)script{
+     return se::ScriptEngine::getInstance()->evalString([script UTF8String]);
 }
 
 @end
