@@ -611,4 +611,36 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
 
     //native method,call GLViewImpl::getGLContextAttrs() to get the OpenGL ES context attributions
     private static native int[] getGLContextAttrs();
+	
+	public static native void setkey(final String key);
+	
+	public static void paramFromJSStaticVoid(final String title,final String message) {
+        sContext.paramFromJSVoid(title, message);
+    }
+
+    public void paramFromJSVoid(String title, String message){
+
+    }
+
+    public static int paramFromJSStaticInt(final String title,final String message) {
+        return sContext.paramFromJSInt(title, message);
+    }
+
+    public int paramFromJSInt(String title, String message){
+        return 0;
+    }
+
+
+    public static String paramFromJSStaticString(final String title,final String message) {
+        return sContext.paramFromJSString(title, message);
+    }
+
+    public String paramFromJSString(String title, String message){
+        return "";
+    }
+
+    public void setxxteakey(String key)
+    {
+        setkey(key);
+    }
 }
