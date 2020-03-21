@@ -7,6 +7,7 @@
 
 #import "NativeOcClass.h"
 #import "AppController.h"
+#import "RootViewController.h"
 
 @implementation NativeOcClass
 
