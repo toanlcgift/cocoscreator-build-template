@@ -168,7 +168,7 @@ public class Cocos2dxHelper {
     }
 
     private static boolean sInited = false;
-    public static void init(final Cocos2dxActivity cocos,final Activity activity) {
+    public static void init(final Cocos2dxForms cocos, final Activity activity) {
         sActivity = activity;
         Cocos2dxHelper.sCocos2dxHelperListener = (Cocos2dxHelperListener)cocos;
         if (!sInited) {
@@ -220,12 +220,12 @@ public class Cocos2dxHelper {
             
             int versionCode = 1;
             try {
-                versionCode = Cocos2dxActivity.getContext().mainActivity.getPackageManager().getPackageInfo(Cocos2dxHelper.getPackageName(), 0).versionCode;
+                versionCode = Cocos2dxForms.getContext().mainActivity.getPackageManager().getPackageInfo(Cocos2dxHelper.getPackageName(), 0).versionCode;
             } catch (NameNotFoundException e) {
                 e.printStackTrace();
             }
             try {
-                Cocos2dxHelper.sOBBFile = APKExpansionSupport.getAPKExpansionZipFile(Cocos2dxActivity.getContext().mainActivity, versionCode, 0);
+                Cocos2dxHelper.sOBBFile = APKExpansionSupport.getAPKExpansionZipFile(Cocos2dxForms.getContext().mainActivity, versionCode, 0);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -366,7 +366,7 @@ public class Cocos2dxHelper {
 
  	public static String getVersion() {
  		try {
- 			String version = Cocos2dxActivity.getContext().mainActivity.getPackageManager().getPackageInfo(Cocos2dxActivity.getContext().mainActivity.getPackageName(), 0).versionName;
+ 			String version = Cocos2dxForms.getContext().mainActivity.getPackageManager().getPackageInfo(Cocos2dxForms.getContext().mainActivity.getPackageName(), 0).versionName;
  			return version;
  		} catch(Exception e) {
  			return "";

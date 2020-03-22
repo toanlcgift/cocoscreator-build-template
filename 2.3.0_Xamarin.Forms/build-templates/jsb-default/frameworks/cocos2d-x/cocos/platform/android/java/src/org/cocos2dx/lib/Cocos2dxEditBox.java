@@ -64,7 +64,7 @@ public class Cocos2dxEditBox {
     private Button mButton = null;
     private String mButtonTitle = null;
     private boolean mConfirmHold = true;
-    private Cocos2dxActivity mActivity = null;
+    private Cocos2dxForms mActivity = null;
     private RelativeLayout mButtonLayout = null;
     private RelativeLayout.LayoutParams mButtonParams;
     private int mEditTextID = 1;
@@ -84,7 +84,7 @@ public class Cocos2dxEditBox {
         private int mScreenHeight;
         private int mTopMargin = 0;
 
-        public  Cocos2dxEditText(Cocos2dxActivity context){
+        public  Cocos2dxEditText(Cocos2dxForms context){
             super(context.mainActivity);
             //remove focus border
             this.setBackground(null);
@@ -260,7 +260,7 @@ public class Cocos2dxEditBox {
         }
     }
 
-    public Cocos2dxEditBox(Cocos2dxActivity context, FrameLayout layout) {
+    public Cocos2dxEditBox(Cocos2dxForms context, FrameLayout layout) {
         Cocos2dxEditBox.sThis = this;
         mActivity = context;
         this.addItems(context, layout);
@@ -278,7 +278,7 @@ public class Cocos2dxEditBox {
     /***************************************************************************************
      Private functions.
      **************************************************************************************/
-    private void addItems(Cocos2dxActivity context, FrameLayout layout) {
+    private void addItems(Cocos2dxForms context, FrameLayout layout) {
         RelativeLayout myLayout = new RelativeLayout(context.mainActivity);
         this.addEditText(context, myLayout);
         this.addButton(context, myLayout);
@@ -300,7 +300,7 @@ public class Cocos2dxEditBox {
 //        });
     }
 
-    private void addEditText(Cocos2dxActivity context, RelativeLayout layout) {
+    private void addEditText(Cocos2dxForms context, RelativeLayout layout) {
         mEditText = new Cocos2dxEditText(context);
         mEditText.setVisibility(View.INVISIBLE);
         mEditText.setBackgroundColor(Color.WHITE);
@@ -311,7 +311,7 @@ public class Cocos2dxEditBox {
         layout.addView(mEditText, editParams);
     }
 
-    private void addButton(Cocos2dxActivity context, RelativeLayout layout) {
+    private void addButton(Cocos2dxForms context, RelativeLayout layout) {
         mButton = new Button(context.mainActivity);
         mButtonParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         mButton.setTextColor(Color.WHITE);

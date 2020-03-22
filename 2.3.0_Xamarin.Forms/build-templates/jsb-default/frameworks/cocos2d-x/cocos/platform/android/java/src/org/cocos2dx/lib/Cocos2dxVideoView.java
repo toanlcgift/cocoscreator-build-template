@@ -84,7 +84,7 @@ public class Cocos2dxVideoView extends SurfaceView {
     // recording the seek position while preparing
     private int         mSeekWhenPrepared = 0;
 
-    protected Cocos2dxActivity mCocos2dxActivity = null;
+    protected Cocos2dxForms mCocos2DxForms = null;
 
     protected int mViewLeft = 0;
     protected int mViewTop = 0;
@@ -115,11 +115,11 @@ public class Cocos2dxVideoView extends SurfaceView {
     // Constructors
     // ===========================================================
 
-    public Cocos2dxVideoView(Cocos2dxActivity activity,int tag) {
+    public Cocos2dxVideoView(Cocos2dxForms activity, int tag) {
         super(activity.mainActivity);
 
         mViewTag = tag;
-        mCocos2dxActivity = activity;
+        mCocos2DxForms = activity;
         initVideoView();
     }
 
@@ -288,8 +288,8 @@ public class Cocos2dxVideoView extends SurfaceView {
 
     public void fixSize() {
         if (mFullScreenEnabled) {
-            mFullScreenWidth = mCocos2dxActivity.getGLSurfaceView().getWidth();
-            mFullScreenHeight = mCocos2dxActivity.getGLSurfaceView().getHeight();
+            mFullScreenWidth = mCocos2DxForms.getGLSurfaceView().getWidth();
+            mFullScreenHeight = mCocos2DxForms.getGLSurfaceView().getHeight();
 
             fixSize(0, 0, mFullScreenWidth, mFullScreenHeight);
         } else {
@@ -416,7 +416,7 @@ public class Cocos2dxVideoView extends SurfaceView {
             mMediaPlayer.setScreenOnWhilePlaying(true);
 
             if (mIsAssetRouse) {
-                AssetFileDescriptor afd = mCocos2dxActivity.mainActivity.getAssets().openFd(mVideoFilePath);
+                AssetFileDescriptor afd = mCocos2DxForms.mainActivity.getAssets().openFd(mVideoFilePath);
                 mMediaPlayer.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
             } else {
                 mMediaPlayer.setDataSource(mVideoUri.toString());
@@ -490,7 +490,7 @@ public class Cocos2dxVideoView extends SurfaceView {
              * longer have a window, don't bother showing the user an error.
              */
             if (getWindowToken() != null) {
-                Resources r = mCocos2dxActivity.mainActivity.getResources();
+                Resources r = mCocos2DxForms.mainActivity.getResources();
                 int messageId;
 
                 if (framework_err == MediaPlayer.MEDIA_ERROR_NOT_VALID_FOR_PROGRESSIVE_PLAYBACK) {
@@ -504,7 +504,7 @@ public class Cocos2dxVideoView extends SurfaceView {
                 int titleId = r.getIdentifier("VideoView_error_title", "string", "android");
                 int buttonStringId = r.getIdentifier("VideoView_error_button", "string", "android");
 
-                new AlertDialog.Builder(mCocos2dxActivity.mainActivity)
+                new AlertDialog.Builder(mCocos2DxForms.mainActivity)
                         .setTitle(r.getString(titleId))
                         .setMessage(messageId)
                         .setPositiveButton(r.getString(buttonStringId),
@@ -569,6 +569,6 @@ public class Cocos2dxVideoView extends SurfaceView {
     private void pausePlaybackService() {
         Intent i = new Intent("com.android.music.musicservicecommand");
         i.putExtra("command", "pause");
-        mCocos2dxActivity.mainActivity.sendBroadcast(i);
+        mCocos2DxForms.mainActivity.sendBroadcast(i);
     }
 }
