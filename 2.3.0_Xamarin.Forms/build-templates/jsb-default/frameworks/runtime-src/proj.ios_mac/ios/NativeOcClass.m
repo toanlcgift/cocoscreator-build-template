@@ -11,15 +11,33 @@
 
 @implementation NativeOcClass
 
+static NativeOcClass *mInstace = nil;
+
+-(void)initNativeCall{
+    mInstace = self;
+}
+
+-(BOOL)callNativeWithReturnBool:(NSString *) title andContent:(NSString *)content{
+    return true;
+}
+
+-(NSString *)callNativeWithReturnString:(NSString *) title andContent:(NSString *)content{
+    return @"callNativeWithReturnString";
+}
+
 +(BOOL)callNativeWithReturnBool:(NSString *) title andContent:(NSString *)content{
-    UIWindow *window = (UIWindow *)[[UIApplication sharedApplication] keyWindow];
-    RootViewController *rootViewController =  (RootViewController *)[[window rootViewController] presentedViewController];
-    return [rootViewController callNativeWithReturnBool:title andContent:content];
+    if(mInstace!=nil){
+        return [mInstace callNativeWithReturnBool:title andContent:content];
+    }else{
+        return false;
+    }
 }
 
 +(NSString *)callNativeWithReturnString:(NSString *) title andContent:(NSString *)content{
-    UIWindow *window = (UIWindow *)[[UIApplication sharedApplication] keyWindow];
-    RootViewController *rootViewController =  (RootViewController *)[[window rootViewController] presentedViewController];
-    return [rootViewController callNativeWithReturnString:title andContent:content];
+    if(mInstace!=nil){
+        return [mInstace callNativeWithReturnString:title andContent:content];
+    }else{
+        return @"";
+    }
 }
 @end
