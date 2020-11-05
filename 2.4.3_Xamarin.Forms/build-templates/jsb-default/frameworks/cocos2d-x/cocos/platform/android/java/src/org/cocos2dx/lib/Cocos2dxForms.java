@@ -248,7 +248,7 @@ public abstract class Cocos2dxForms implements Cocos2dxHelperListener {
                 return cfgVals[lo].config;
             }
 
-            Log.e(DEVICE_POLICY_SERVICE, "Can not select an EGLConfig for rendering.");
+            //Log.e(DEVICE_POLICY_SERVICE, "Can not select an EGLConfig for rendering.");
             return null;
         }
 
@@ -260,9 +260,6 @@ public abstract class Cocos2dxForms implements Cocos2dxHelperListener {
 
     public Cocos2dxGLSurfaceView getGLSurfaceView(){
         return  mGLSurfaceView;
-    }
-    public static Context getContext() {
-        return sContext;
     }
 
     public void init(Context context) {
@@ -281,7 +278,7 @@ public abstract class Cocos2dxForms implements Cocos2dxHelperListener {
         // Set frame layout as the content view
         //setContentView(mFrameLayout);
 
-        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        WindowManager.LayoutParams lp = this.mainActivity.getWindow().getAttributes();
         try {
             Field field = lp.getClass().getField("layoutInDisplayCutoutMode");
             //Field constValue = lp.getClass().getDeclaredField("LAYOUT_IN_DISPLAY_CUTOUT_MODE_NEVER");
@@ -296,7 +293,7 @@ public abstract class Cocos2dxForms implements Cocos2dxHelperListener {
                     | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
 
             flag |= View.class.getDeclaredField("SYSTEM_UI_FLAG_IMMERSIVE_STICKY").getInt(null);
-            View view = getWindow().getDecorView();
+            View view = this.mainActivity.getWindow().getDecorView();
             view.setSystemUiVisibility(flag);
 
         } catch (NoSuchFieldException e) {
@@ -431,7 +428,7 @@ public abstract class Cocos2dxForms implements Cocos2dxHelperListener {
     public void onDestroy(Context context) {
 
         // Workaround in https://stackoverflow.com/questions/16283079/re-launch-of-activity-on-home-button-but-only-the-first-time/16447508
-        if (!activity.isTaskRoot()) {
+        if (!this.mainActivity.isTaskRoot()) {
             return;
         }
 
